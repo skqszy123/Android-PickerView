@@ -1,7 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-//apply plugin: 'com.novoda.bintray-release'//添加JCenter插件
-
+apply plugin: 'maven-publish'
 
 
 android {
@@ -47,4 +45,55 @@ dependencies {
     api project(path: ':wheelview')
 //    api 'com.contrarywind:wheelview:4.1.0'
     implementation 'com.android.support:support-annotations:28.0.0'
+}
+
+
+version = "4.9.0.1"
+
+def group_id = "com.halobear"
+def artifact_id = "Android-PickerView"
+
+def is_public = true
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = group_id
+            artifactId = artifact_id
+            //最后必须是-SNAPSHOT
+            version = is_public.toBoolean() ? version : '1.0.0-SNAPSHOT'
+
+            afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
+            pom.withXml {
+                def dependenciesNode = asNode().appendNode('dependencies')
+                configurations.implementation.allDependencies.withType(ModuleDependency) { ModuleDependency dp ->
+                    if (dp.version != "unspecified") { // 过滤项目内library引用
+                        def dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', dp.group)
+                        dependencyNode.appendNode('artifactId', dp.name)
+                        dependencyNode.appendNode('version', dp.version)
+                        // for exclusions
+                        if (dp.excludeRules.size() > 0) {
+                            def exclusions = dependencyNode.appendNode('exclusions')
+                            dp.excludeRules.each { ExcludeRule ex ->
+                                def exclusion = exclusions.appendNode('exclusion')
+                                exclusion.appendNode('groupId', ex.group)
+                                exclusion.appendNode('artifactId', ex.module)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            credentials {
+                username '62cbc480dbd131f866db3ee5'
+                password 'Pf=Ngmz5]qO_'
+            }
+            url = is_public.toBoolean() ? 'https://packages.aliyun.com/maven/repository/2002699-release-wOeHZz/' : 'https://packages.aliyun.com/maven/repository/2002699-snapshot-McZYc3/'
+        }
+    }
 }

@@ -1,0 +1,23 @@
+allprojects {
+    repositories {
+        maven {
+            url 'https://maven.aliyun.com/repository/public'
+        }
+
+        maven {
+            credentials {
+                username 'Hcwu5y'
+                password 'LRoNXvXf70'
+            }
+            url 'https://repo.rdc.aliyun.com/repository/10441-release-QkxjWG/'
+        }
+        maven {
+            credentials {
+                username 'Hcwu5y'
+                password 'LRoNXvXf70'
+            }
+            url 'https://repo.rdc.aliyun.com/repository/10441-snapshot-2eR6Nq/'
+        }
+
+    }
+}

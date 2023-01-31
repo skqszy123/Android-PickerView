@@ -1,29 +1,36 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+apply from: "init.gradle"
 buildscript {
     repositories {
-        maven {
-            url 'https://maven.google.com/'
-            name 'Google'
-        }
-        jcenter()
+        maven { url 'https://developer.huawei.com/repo/' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://www.jitpack.io' }
+        maven { url 'https://repo1.maven.org/maven2/' }
     }
+
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.1'
-//        classpath "com.novoda:bintray-release:0.9.1"
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'com.android.tools.build:gradle:7.0.4'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        //green-dao数据库
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.3.0'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
     }
 }
 
 allprojects {
     repositories {
-        jcenter()
-        maven {
-            url 'https://maven.google.com/'
-            name 'Google'
-        }
+        maven { url 'https://developer.huawei.com/repo/' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://www.jitpack.io' }
+        maven { url 'https://repo1.maven.org/maven2/' }
+    }
+
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
     }
 }
 
