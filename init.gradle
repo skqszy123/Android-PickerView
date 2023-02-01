@@ -1,23 +1,20 @@
 allprojects {
     repositories {
         maven {
-            url 'https://maven.aliyun.com/repository/public'
-        }
-
-        maven {
             credentials {
-                username 'Hcwu5y'
-                password 'LRoNXvXf70'
+                username '62cbc480dbd131f866db3ee5'
+                password 'Pf=Ngmz5]qO_'
             }
-            url 'https://repo.rdc.aliyun.com/repository/10441-release-QkxjWG/'
+            url 'https://packages.aliyun.com/maven/repository/2002699-release-wOeHZz/'
         }
         maven {
             credentials {
-                username 'Hcwu5y'
-                password 'LRoNXvXf70'
+                username '62cbc480dbd131f866db3ee5'
+                password 'Pf=Ngmz5]qO_'
             }
-            url 'https://repo.rdc.aliyun.com/repository/10441-snapshot-2eR6Nq/'
+            url 'https://packages.aliyun.com/maven/repository/2002699-snapshot-McZYc3/'
         }
-
     }
 }
+
+
